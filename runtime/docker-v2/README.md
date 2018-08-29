@@ -15,6 +15,33 @@ tank/v2/myvol1        10485760       128  10485632   0% /data
 ```
 **Note:** When used for emulating HPE Nimble Storage, use `--alias nimble` to able to run `docker compose` and such unmodified from production environments.
 
+## Other distributions
+While there's a strong preference for Ubuntu when using Nemo we try to not let users of other Linux flavors hanging.
+
+### Red Hat Enterprise Linux and CentOS
+It's advised to to follow the official [OpenZFS for Linux procedures](https://github.com/zfsonlinux/zfs/wiki/RHEL-and-CentOS) to install and maintain OpenZFS. 
+
+Once OpenZFS for Linux is installed:
+```
+sudo yum install -y docker
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+At this point the plugin should be ready to be installed. On CentOS in particular, this error might arise:
+```
+Error response from daemon: rpc error: code = 2 desc = shim error: docker-runc not installed on system
+```
+A fix is elaborated on at https://access.redhat.com/solutions/2876431 (requires a Red Hat account) but the TLDR; version is available on Stack Overflow:
+```
+cd /usr/libexec/docker/
+sudo ln -s docker-runc-current docker-runc
+```
+Now:
+```
+sudo docker plugin install --alias nemo --grant-all-permissions nimblestorage/nemo:1.0.0
+sudo docker volume create -d nemo myvol1
+```
+
 # Customizing Nemo as a managed plugin
 Managed plugins are controlled with "settable" environment variables. Inspecting the plugin once it's installed on the host reveals a few self explanatory options:
 
