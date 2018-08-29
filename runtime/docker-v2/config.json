@@ -1,0 +1,110 @@
+{
+  "Args": {
+    "Description": "",
+    "Name": "",
+    "Settable": null,
+    "Value": null
+  },
+  "Description": "Nemo: HPE Nimble Storage Advanced Data Services Emulator for Containers",
+  "Documentation": "https://github.com/NimbleStorage/Nemo",
+  "Entrypoint": [
+    "/entrypoint.sh"
+  ],
+  "Env": [
+    {
+      "Description": "Log level",
+      "Name": "NEMO_DEBUG",
+      "Settable": [
+        "value"
+      ],
+      "Value": "debug"
+    },
+    {
+      "Description": "Default volume size (in GiB)",
+      "Name": "NEMO_DEFAULTSIZE",
+      "Settable": [
+        "value"
+      ],
+      "Value": "10"
+    },
+    {
+      "Description": "Nemo OpenZFS files",
+      "Name": "NEMO_POOLDIR",
+      "Settable": [
+        null
+      ],
+      "Value": "/var/lib/nemo"
+    },
+    {
+      "Description": "Nemo OpenZFS pool name",
+      "Name": "NEMO_POOLNAME",
+      "Settable": [
+        "value"
+      ],
+      "Value": "tank"
+    },
+    {
+      "Description": "Nemo OpenZFS pool size (in GiB)",
+      "Name": "NEMO_POOLSIZE",
+      "Settable": [
+        "value"
+      ],
+      "Value": "64"
+    }
+  ],
+  "Interface": {
+    "Socket": "nemo.sock",
+    "Types": [
+      "docker.volumedriver/1.0"
+    ]
+  },
+  "Linux": {
+    "Capabilities": [
+      "CAP_SYS_ADMIN",
+      "CAP_SYS_MODULE"
+    ],
+    "AllowAllDevices": true,
+    "Devices": null
+  },
+  "Mounts": [
+        {
+          "Description": "Device Tree",
+          "Destination": "/dev",
+          "Name": "",
+          "Options": [
+            "rbind"
+          ],
+          "Settable": null,
+          "Source": "/dev",
+          "Type": "bind"
+        },
+        {
+          "Description": "Kernel Modules",
+          "Destination": "/lib/modules",
+          "Name": "",
+          "Options": [
+            "rbind"
+          ],
+          "Settable": null,
+          "Source": "/lib/modules",
+          "Type": "bind"
+        },
+        {
+          "Description": "Logs and artificial OpenZFS pool",
+          "Destination": "/var",
+          "Name": "",
+          "Options": [
+            "rbind"
+          ],
+          "Settable": null,
+          "Source": "/var",
+          "Type": "bind"
+        }
+  ],
+  "Network": {
+    "Type": ""
+  },
+  "PropagatedMount": "/opt/nemo",
+  "User": {},
+  "Workdir": "/"
+}
