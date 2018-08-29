@@ -50,6 +50,12 @@ Please file issues on this GitHub repo for bug reports, inquiries and help ticke
 # Contributing
 Contributions to Nemo from outside HPE require a contributor license agreement (CLA) with HPE. It's a legality to ensure contributors understands their contributions are subject to the Open Source license this software is made available.
 
+# Other OpenZFS Docker Volume plugins
+This is not the first Docker Volume plugin for OpenZFS. The primary purpose of Nemo is for it to be an emulator for HPE Nimble Storage Docker Volume plugin, it may have uses outside of that, but please checkout these projects that inspired Nemo:
+
+* https://github.com/TrilliumIT/docker-zfs-plugin
+* https://bitbucket.org/osallou/docker-plugin-zfs
+
 # License
 ```
 (C) Copyright 2018 Hewlett Packard Enterprise Development LP
