@@ -1,0 +1,9 @@
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+metadata:
+  name: transactionaldb
+provisioner: dev.hpe.com/nemo
+parameters:
+  perfPolicy: "SQL Server"
+  description: "Persistent Volume provisioned by HPE Nimble Storage Kube Storage Controller from default StorageClass"

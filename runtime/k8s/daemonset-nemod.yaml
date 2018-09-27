@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nemod
+  namespace: kube-system
+  labels:
+    k8s-app: nemod
+spec:
+  selector:
+    matchLabels:
+      name: nemod
+  template:
+    metadata:
+      labels:
+        name: nemod
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - name: nemod
+        image: nimblestorage/nemod:1.0.0
+        env:
+        - name: NEMO_DEBUG
+          value: debug
+        - name: NEMO_DEFAULTSIZE
+          value: "10"
+        - name: NEMO_POOLDIR
+          value: /var/lib/nemo
+        - name: NEMO_POOLNAME
+          value: tank
+        - name: NEMO_POOLSIZE
+          value: "64"
+        volumeMounts:
+        - name: varlibkubeletplugins
+          mountPath: /var/lib/kubelet/plugins/dev.hpe.com/mounts
+          mountPropagation: Bidirectional
+        - name: dev
+          mountPath: /dev
+        - name: libmodules
+          mountPath: /lib/modules
+        - name: var
+          mountPath: /var
+        - name: exec
+          mountPath: /usr/libexec/kubernetes/kubelet-plugins/volume/exec
+        - name: rundockerplugins
+          mountPath: /run/docker/plugins
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - CAP_SYS_ADMIN
+              - CAP_SYS_MODULE
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: varlibkubeletplugins
+        hostPath:
+          path: /var/lib/kubelet/plugins/dev.hpe.com/mounts
+      - name: dev
+        hostPath:
+          path: /dev
+      - name: libmodules
+        hostPath:
+          path: /lib/modules
+      - name: var
+        hostPath:
+          path: /var
+      - name: exec
+        hostPath:
+          path: /usr/libexec/kubernetes/kubelet-plugins/volume/exec
+      - name: rundockerplugins
+        hostPath:
+          path: /run/docker/plugins

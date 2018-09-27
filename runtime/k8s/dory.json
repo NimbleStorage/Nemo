@@ -1,0 +1,4 @@
+{
+  "dockerVolumePluginSocketPath": "%DRIVER_SOCKET%",
+  "defaultOptions": [ { "mountConflictDelay": "30" } ]
+}
