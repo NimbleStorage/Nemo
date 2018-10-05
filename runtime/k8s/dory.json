@@ -1,4 +1,10 @@
 {
   "dockerVolumePluginSocketPath": "%DRIVER_SOCKET%",
+  "logFilePath": "/var/log/dory.log",
+  "logDebug": true,
+  "stripK8sFromOptions": true,
+  "createVolumes": true,
+  "enable1.6": false,
+  "listOfStorageResourceOptions": [ "size", "sizeInGiB" ],
   "defaultOptions": [ { "mountConflictDelay": "30" } ]
 }
