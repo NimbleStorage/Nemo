@@ -11,8 +11,7 @@ kubectl create -f https://raw.githubusercontent.com/NimbleStorage/Nemo/master/ru
 ```
 It's now possible to create StorageClasses and Persistent Volume Claims or use the FlexVolume driver inline. The provisioner listens on `dev.hpe.com/nemo`.
 
-**Note**: When deploying `doryd` on GKE, a custom role binding for your particular user running `kubectl` needs to be created.
-
+**Note**: When deploying `doryd` on GKE, a custom role binding for your particular user running `kubectl` needs to be created:
 ```kubectl create clusterrolebinding cluster-admin-nemo --clusterrole=cluster-admin --user=user@fqdn.com```
 
 ## Using
