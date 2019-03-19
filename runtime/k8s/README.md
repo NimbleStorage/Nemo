@@ -19,6 +19,7 @@ kubectl create clusterrolebinding cluster-admin-nemo --clusterrole=cluster-admin
 Also, the FlexVolume path on GKE is in a non-standard location. A sample DaemonSet has been provided as such:
 ```
 kubectl create -f https://raw.githubusercontent.com/NimbleStorage/Nemo/master/runtime/k8s/daemonset-nemod-gke.yaml
+kubectl create -f https://raw.githubusercontent.com/NimbleStorage/Nemo/master/runtime/k8s/deploy-doryd-gke.yaml
 ```
 
 ## Using
